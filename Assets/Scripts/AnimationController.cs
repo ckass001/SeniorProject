@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sr;
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
