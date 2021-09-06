@@ -5,13 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Animator anim;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpHeight = 7f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
     }
     void Update()
     {
