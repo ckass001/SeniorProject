@@ -20,10 +20,10 @@ public class ReadInputText : MonoBehaviour
         userName = s;
     }
 
-    public void ReadAge(int i)
+    public void ReadAge(string i)
     {
         Debug.Log(i);
-        userAge = i;
+        userAge = int.Parse(i);
     }
 
     public void SaveToString()
