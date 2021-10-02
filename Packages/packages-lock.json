@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.lastabyss.simplegraphql": {
+      "version": "https://github.com/LastAbyss/SimpleGraphQL-For-Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
+      },
+      "hash": "73226560bd199c3f21b5b478bc384919b3f36880"
+    },
     "com.unity.2d.animation": {
       "version": "6.0.5",
       "depth": 0,
@@ -125,6 +134,13 @@
     },
     "com.unity.mathematics": {
       "version": "1.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "2.0.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
