@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7544f1907c44b1394f70c35d12caec5, type: 3}
+  m_Name: New Graph QL Config
+  m_EditorClassIdentifier: 
+  Endpoint: http://localhost:8000/graphql/
+  Files:
+  - {fileID: -2997410325540601474, guid: f1bbdd00d4f18254cb95872dd71b7573, type: 3}
+  - {fileID: -2997410325540601474, guid: fc14e9d74d626d645b3eac399f249c2f, type: 3}
+  AuthScheme: Bearer
+  CustomHeaders:
+  - Key: notsecure-salt
+    Value: HTTP_AUTHORIZATION
