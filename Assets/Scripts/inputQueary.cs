@@ -40,29 +40,29 @@ public class inputQueary : MonoBehaviour
 
     public async void testQuery()
     {
-        var graphQL = new GraphQLClient(Config);
-        Query query = graphQL.FindQuery("sampleQuearyFile");
+        var client = new GraphQLClient("http://localhost:8000/designer_api/");
+        var request = new Request
+        {
+            Query = @"query {
+            allAuthors {
+            firstName,
+            lastName
+            }
+            }"
+        };
 
-        string results = await graphQL.Send(
-        query.ToRequest(new Dictionary<string, object>
+        // You're going to need to set this to the right data type
+        Data listOfStudents = new Data();
+        var response = await client.Send(() => listOfStudents, request);
+        //listOfStudents = JsonUtility.FromJson<Root>(results);
+        for(int i = 0; i < response.Data.allAuthors.Count;i++)
         {
-            {"variable", "value"}
-        }),
-        null,
-       "authToken",
-       "Bearer"
-        );
-        File.WriteAllText(@".\Assets\Files\test.json",results);
-        Root listOfStudents = new Root();
-        listOfStudents = JsonUtility.FromJson<Root>(results);
-        for(int i = 0; i < listOfStudents.data.allAuthors.Count;i++)
-        {
-            textField.text += (listOfStudents.data.allAuthors[i].firstName + " " + listOfStudents.data.allAuthors[i].lastName);
+            textField.text += (response.Data.allAuthors[i].firstName + " " + response.Data.allAuthors[i].lastName);
         }
     }
     public async void testMutation()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient("http://localhost:8000/designer_api/");
 var request = new Request
 {
     Query = @"mutation AddAuthor($first: String!, $last: String!) {
