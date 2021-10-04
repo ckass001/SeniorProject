@@ -1,0 +1,12 @@
+mutation AddAuthor {
+  createAuthor(
+    authorData: {
+      firstName: "John",
+      lastName:  "Flanagan"
+    }
+  ) {
+    author {
+      firstName
+    }
+  }
+}
