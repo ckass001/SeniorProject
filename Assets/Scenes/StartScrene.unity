@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &110286886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -727,6 +727,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ReadInputText, Assembly-CSharp
         m_MethodName: ReadName
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 644171300}
+        m_TargetAssemblyTypeName: inputQueary, Assembly-CSharp
+        m_MethodName: testQuery
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1761,6 +1773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 644171298}
   - component: {fileID: 644171299}
+  - component: {fileID: 644171300}
   m_Layer: 5
   m_Name: EnterStudentInfo
   m_TagString: Untagged
@@ -1804,6 +1817,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userName: 
   userAge: 0
+--- !u!114 &644171300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644171297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d28031143f5cce44195885ae35a7010f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstName: 
+  lastName: 
+  Config: {fileID: 11400000, guid: b9ffe8f94b7e72e4192799cd289b7987, type: 2}
 --- !u!1 &730819821
 GameObject:
   m_ObjectHideFlags: 0
