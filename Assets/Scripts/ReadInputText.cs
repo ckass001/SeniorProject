@@ -9,9 +9,9 @@ public class ReadInputText : MonoBehaviour
 
     public void Start()
     {
-        if (!File.Exists(@".\Files\UserInfo.json"))
+        if (!File.Exists(@".\Assets\Files\UserInfo.json"))
         {
-            File.Create(@".\Files\UserInfo.json");
+            File.Create(@".\Assets\Files\UserInfo.json");
         }
     }
     public void ReadName(string s)
@@ -28,6 +28,6 @@ public class ReadInputText : MonoBehaviour
 
     public void SaveToString()
     {
-        File.WriteAllText(@".\Files\UserInfo.json", JsonUtility.ToJson(this, true));
+        File.WriteAllText(@".\Assets\Files\UserInfo.json", JsonUtility.ToJson(this, true));
     }
 }

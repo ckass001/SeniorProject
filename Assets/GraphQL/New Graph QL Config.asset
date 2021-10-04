@@ -16,6 +16,7 @@ MonoBehaviour:
   Files:
   - {fileID: -2997410325540601474, guid: f1bbdd00d4f18254cb95872dd71b7573, type: 3}
   - {fileID: -2997410325540601474, guid: fc14e9d74d626d645b3eac399f249c2f, type: 3}
+  - {fileID: -2997410325540601474, guid: 03bfb7c61adb04041818ba360b100ee7, type: 3}
   AuthScheme: Bearer
   CustomHeaders:
   - Key: notsecure-salt
