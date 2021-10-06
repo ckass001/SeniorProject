@@ -1,0 +1,6 @@
+query {
+  allAuthors {
+    firstName,
+    lastName
+  }
+}
