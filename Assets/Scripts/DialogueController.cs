@@ -11,6 +11,6 @@ public class DialogueController : MonoBehaviour
     {
         QuestionText.enabled = true;
         QuestionBackgroundImage.enabled = true;
-        QuestionText.text = "This is an example Question, Choose the Green Sphere";
+        QuestionText.text = "Good morning. Now, Bob has been crunching some numbers and has come to the realization that there is no way he can afford this apartment on his own. ";
     }
 }
