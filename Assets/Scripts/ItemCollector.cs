@@ -9,11 +9,11 @@ public class ItemCollector : MonoBehaviour
     [SerializeField] private Text orangeCounterText;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Orange"))
+        if(collision.gameObject.CompareTag("Coffee"))
         {
             Destroy(collision.gameObject);
             orangeCounter++;
-            orangeCounterText.text = "Oranges: " + orangeCounter;
+            orangeCounterText.text = "Coffee Count: " + orangeCounter;
         }
     }
 }
