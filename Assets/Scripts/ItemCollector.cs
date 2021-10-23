@@ -13,7 +13,7 @@ public class ItemCollector : MonoBehaviour
         {
             Destroy(collision.gameObject);
             orangeCounter++;
-            orangeCounterText.text = "Coffee Count: " + orangeCounter;
+            orangeCounterText.text = "Coffee Counter: " + orangeCounter;
         }
     }
 }
