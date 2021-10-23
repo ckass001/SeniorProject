@@ -11,6 +11,6 @@ public class CorrectOption : MonoBehaviour
     {
         QuestionText.enabled = true;
         QuestionBackgroundImage.enabled = true;
-        QuestionText.text = "Correct!";
+        QuestionText.text = "Thankfully, the apartment is large enough to accommodate an additional person.Bob is going to have a roommate.";
     }
 }
