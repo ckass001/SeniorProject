@@ -122,14 +122,14 @@ public class LoginHandler : MonoBehaviour
 
         // You're going to need to set this to the right data type
         Data2 listOfLessons = new Data2();
-        //var response = await client.Send(() => listOfLessons, request);
-        var response  = await client.Send(request);
+        var response = await client.Send(() => listOfLessons, request, null, userToken, "Bearer");
+        //var response  = await client.Send(request,null,userToken,"Bearer");
         //File.WriteAllText("Output.txt", response.Data.allLessons[0].title);
-        Debug.Log(response);
-        /*for (int i = 0; i < response.Data.allLessons.Count; i++)
+        //Debug.Log(response.Data.allLessons[0].title);
+        for (int i = 0; i < response.Data.allLessons.Count; i++)
         {
-            textField.text += (response.Data.allLessons[i].title + " " + response.Data.allLessons[i].description + System.Environment.NewLine);
-        }*/
+            textField.text += (response.Data.allLessons[i].title + ": " + response.Data.allLessons[i].description + System.Environment.NewLine);
+        }
     }
 
     public async void makeLesson()
@@ -149,7 +149,7 @@ public class LoginHandler : MonoBehaviour
             {
                 content = "AHGG",
                 description = "In Game Made",
-                module = 1,
+                module = 3,
                 title = "IHateGraphQL"
             }
         };
@@ -161,7 +161,7 @@ public class LoginHandler : MonoBehaviour
     {
         Header GQLHeader = new Header();
         GQLHeader.Key = "Authorization";
-        GQLHeader.Value = "JWT " + userToken;
+        GQLHeader.Value = "Bearer " + userToken;
         Config.CustomHeaders[0] = GQLHeader;
         //Config.CustomHeaders.Add(GQLHeader);
     }
