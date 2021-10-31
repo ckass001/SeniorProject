@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7544f1907c44b1394f70c35d12caec5, type: 3}
   m_Name: New Graph QL Config
   m_EditorClassIdentifier: 
-  Endpoint: http://localhost:8000/designer_api/
+  Endpoint: http://localhost:8000/graphql/
   Files:
   - {fileID: -2997410325540601474, guid: f1bbdd00d4f18254cb95872dd71b7573, type: 3}
   - {fileID: -2997410325540601474, guid: fc14e9d74d626d645b3eac399f249c2f, type: 3}
   - {fileID: -2997410325540601474, guid: 03bfb7c61adb04041818ba360b100ee7, type: 3}
   AuthScheme: Bearer
   CustomHeaders:
-  - Key: notsecure-salt
-    Value: HTTP_AUTHORIZATION
+  - Key: Authorization
+    Value: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IlRlYWNoZXIiLCJleHAiOjE2MzU2MjIyMzcsIm9yaWdJYXQiOjE2MzU2MjE5Mzd9.jxMJa-kyP4gBCSTKzB9sQEx2kRTsuUFqQJ-AOgrI_j0
