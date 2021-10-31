@@ -20,4 +20,4 @@ MonoBehaviour:
   AuthScheme: Bearer
   CustomHeaders:
   - Key: Authorization
-    Value: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IlRlYWNoZXIiLCJleHAiOjE2MzU2MjIyMzcsIm9yaWdJYXQiOjE2MzU2MjE5Mzd9.jxMJa-kyP4gBCSTKzB9sQEx2kRTsuUFqQJ-AOgrI_j0
+    Value: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IlN0dWRlbnQxIiwiZXhwIjoxNjM1NzAzMTkxLCJvcmlnSWF0IjoxNjM1NzAyODkxfQ.6Zy1xyT7yTwvpwJyZ4LpESNqaewLUFwRA6uYvdBgL9M
