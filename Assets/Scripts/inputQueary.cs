@@ -5,6 +5,8 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using TMPro;
+
+
 public class inputQueary : MonoBehaviour
 {
     [System.Serializable]
@@ -30,13 +32,22 @@ public class inputQueary : MonoBehaviour
     public string LName;
     public Text textField;
     public GraphQLConfig Config;
+    public string token;
     public void Start()
     {
-        if (!File.Exists(@".\Assets\Files\test.graphql"))
-        {
-            File.Create(@".\Assets\Files\test.graphql");
-        }
+        //if (!file.exists(@".\assets\files\test.graphql"))
+        //{
+        //    file.create(@".\assets\files\test.graphql");
+        //}
     }
+
+    /*public async void testingStuff()
+    {
+        Header GQLHeader = new Header();
+        GQLHeader.Key = "Authorization";
+        GQLHeader.Value = "JWT " + token;
+        Config.CustomHeaders.Add(GQLHeader);
+    }*/
 
     public async void testQuery()
     {
