@@ -5,7 +5,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class LoginHandler : MonoBehaviour
 {
     [System.Serializable]
@@ -66,11 +66,10 @@ public class LoginHandler : MonoBehaviour
     private string userToken;
     [SerializeField] public GraphQLConfig Config;
     public Text textField;
+    [SerializeField] public GameObject wrongCred;
 
     public async void generateToken()
     {
-    
-
         var client = new GraphQLClient("http://localhost:8000/graphql/");
         var request = new Request
         {
@@ -164,6 +163,49 @@ public class LoginHandler : MonoBehaviour
         GQLHeader.Value = "Bearer " + userToken;
         Config.CustomHeaders[0] = GQLHeader;
         //Config.CustomHeaders.Add(GQLHeader);
+    }
+
+    public async void loginAndPlay()
+    {
+        //userToken = null;
+        try
+        {
+            var client = new GraphQLClient("http://localhost:8000/graphql/");
+            var request = new Request
+            {
+                Query = @"mutation TokenAuth($username: String!, $password: String!) {
+                      tokenAuth(username: $username, password: $password) {
+                        token
+                        payload
+                        refreshExpiresIn
+                      }
+                    }",
+                Variables = new
+                {
+                    username = userusername,
+                    password = userpassword
+                }
+            };
+            Data hopeThisWorks = new Data();
+            var response = await client.Send(() => hopeThisWorks, request);
+            userToken = response.Data.tokenAuth.token;
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+        finally
+        {
+            if (userToken != null)
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
+            else
+            {
+                wrongCred.SetActive(true);
+            }
+        }
     }
 
     public void readUsername(string input)
