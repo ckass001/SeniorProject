@@ -63,7 +63,6 @@ public class LoginHandler : MonoBehaviour
 
     private string userusername;
     private string userpassword;
-    private string userToken;
     [SerializeField] public GraphQLConfig Config;
     public Text textField;
     [SerializeField] public GameObject wrongCred;
@@ -89,7 +88,7 @@ public class LoginHandler : MonoBehaviour
         //var responseType = new { createAuthor = new { author = new { firstName = "" } } };
         Data hopeThisWorks = new Data();
         var response = await client.Send(() => hopeThisWorks, request);
-        userToken = response.Data.tokenAuth.token;
+        SaveBetweenScenes.authenticationToken = response.Data.tokenAuth.token;
         addTokenHeader();
         //Debug.Log("Got This Far");
     }
@@ -121,7 +120,7 @@ public class LoginHandler : MonoBehaviour
 
         // You're going to need to set this to the right data type
         Data2 listOfLessons = new Data2();
-        var response = await client.Send(() => listOfLessons, request, null, userToken, "Bearer");
+        var response = await client.Send(() => listOfLessons, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
         //var response  = await client.Send(request,null,userToken,"Bearer");
         //File.WriteAllText("Output.txt", response.Data.allLessons[0].title);
         //Debug.Log(response.Data.allLessons[0].title);
@@ -160,7 +159,7 @@ public class LoginHandler : MonoBehaviour
     {
         Header GQLHeader = new Header();
         GQLHeader.Key = "Authorization";
-        GQLHeader.Value = "Bearer " + userToken;
+        GQLHeader.Value = "Bearer " + SaveBetweenScenes.authenticationToken;
         Config.CustomHeaders[0] = GQLHeader;
         //Config.CustomHeaders.Add(GQLHeader);
     }
@@ -188,7 +187,7 @@ public class LoginHandler : MonoBehaviour
             };
             Data hopeThisWorks = new Data();
             var response = await client.Send(() => hopeThisWorks, request);
-            userToken = response.Data.tokenAuth.token;
+            SaveBetweenScenes.authenticationToken = response.Data.tokenAuth.token;
         }
         catch (System.Exception)
         {
@@ -197,9 +196,9 @@ public class LoginHandler : MonoBehaviour
         }
         finally
         {
-            if (userToken != null)
+            if (SaveBetweenScenes.authenticationToken != null)
             {
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("AppartmentScene");
             }
             else
             {

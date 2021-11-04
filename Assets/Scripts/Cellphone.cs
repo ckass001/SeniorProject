@@ -8,7 +8,5 @@ public class Cellphone : MonoBehaviour
     public void changemenuscene(string scenename )
     {
         SceneManager.LoadScene(scenename);
-
-        
     }
 }
