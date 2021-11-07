@@ -8,7 +8,7 @@ public class Delay : MonoBehaviour
 {
     void Start()
     {
-        DOVirtual.DelayedCall(3, GotoNextScene);
+        DOVirtual.DelayedCall(2, GotoNextScene);
 
       //  DOVirtual.DelayedCall(3, GotoNextScene2);
     }
