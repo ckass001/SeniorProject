@@ -5,18 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    public void Scene3()
-    {
-        SceneManager.LoadScene("ApartmentScene");
+    public void Apartment1 ()
+    { 
+        SceneManager.LoadScene("Apartment1");
     }
 
-     public void Scene4()
+     public void Load()
     {
         SceneManager.LoadScene("LoadingScreen");
     }
 
-     public void Scene5()
+     public void LessonUI()
     {
-        SceneManager.LoadScene("LessonUI");
+        SceneManager.LoadScene("Lesson UI");
+    }
+
+     public void ChooseApartment()
+    {
+        SceneManager.LoadScene("Choose Apartment");
     }
 }
