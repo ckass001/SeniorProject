@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Choose Apartment.unity
     guid: 2e3f4673861bf5145bee68de0cf1fa5a
+  - enabled: 1
+    path: Assets/Scenes/Decissions.unity
+    guid: 5b6cba4a477d61347b93eafedb4381bf
   m_configObjects: {}

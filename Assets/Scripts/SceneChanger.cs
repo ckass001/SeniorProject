@@ -24,4 +24,9 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene("Choose Apartment");
     }
+
+    public void LoadArbitraryScene(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
+    }
 }
