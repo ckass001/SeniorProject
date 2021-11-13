@@ -33,6 +33,7 @@ public class CameraController : MonoBehaviour
         if (Time.timeScale != 0)
         {
             Time.timeScale = 0;
+            Timer.timerIsRunning = false;
             playerRb.bodyType = RigidbodyType2D.Static;
             playerm.enabled = !playerm.enabled;
             playerAC.enabled = !playerAC.enabled;
@@ -42,6 +43,7 @@ public class CameraController : MonoBehaviour
         else
         {
             Time.timeScale = 1;
+            Timer.timerIsRunning = true;
             playerRb.bodyType = RigidbodyType2D.Dynamic;
             playerm.enabled = !playerm.enabled;
             playerAC.enabled = !playerAC.enabled;

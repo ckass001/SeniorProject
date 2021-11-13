@@ -7,4 +7,5 @@ public class SaveBetweenScenes : MonoBehaviour
     public static string authenticationToken;
     public static int playerBank;
     public static int playerMorale;
+    public static int currentLesson = 1;
 }

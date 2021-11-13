@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     public float timeRemaining = 100; // floating point variable declared to store the amount of time 
                                      //remaining in the countdown 
     
-    public bool timerIsRunning = false;  
+    public static bool timerIsRunning = false;  
 
     public Text timerText; //declare text object used to diaplay time in the game
 
@@ -32,7 +32,9 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining = 0;
                 Debug.Log("Time has run out!");
-                timerIsRunning = false;  
+                timerIsRunning = false;
+                SaveBetweenScenes.currentLesson += 1;
+                SceneManager.LoadScene("Apartment1");
             }
         }
     }
