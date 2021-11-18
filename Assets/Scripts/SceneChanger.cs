@@ -29,4 +29,9 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene(SceneName);
     }
+
+    public void Assessment()
+    {
+        SceneManager.LoadScene("PretestScreen");
+    }
 }
