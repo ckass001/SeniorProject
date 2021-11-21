@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PretestScreen.unity
     guid: 771a6fe9aaae4f349bf716dcc4fe79c3
+  - enabled: 1
+    path: Assets/Scenes/Apartment2.unity
+    guid: b91773761147f0e4381b293c72140043
   m_configObjects: {}
