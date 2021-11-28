@@ -15,7 +15,7 @@ public class DelayModule : MonoBehaviour
 
     void GotoNextScene ()
     {
-        SceneManager.LoadScene("Choose Apartment");
+        SceneManager.LoadScene("Classroom");
     }
 
 }
