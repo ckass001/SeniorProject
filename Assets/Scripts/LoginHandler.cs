@@ -198,7 +198,7 @@ public class LoginHandler : MonoBehaviour
         {
             if (SaveBetweenScenes.authenticationToken != null)
             {
-                SceneManager.LoadScene("Apartment1");
+                SceneManager.LoadScene("PretestScreen");
             }
             else
             {
