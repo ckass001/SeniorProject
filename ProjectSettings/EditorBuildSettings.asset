@@ -11,4 +11,40 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/Main Menu.unity
+    guid: d74b29178669b714383700b0d0ce1bc3
+  - enabled: 1
+    path: Assets/Scenes/Apartment1.unity
+    guid: eec6ed9016b33534bb518d889e926e23
+  - enabled: 0
+    path: Assets/Scenes/LoadingScreen.unity
+    guid: b464d21bfed696f449128b02ed05c184
+  - enabled: 1
+    path: Assets/Scenes/Lesson UI.unity
+    guid: 3266a3b1f7a48d64e8cba7a4aa7f149a
+  - enabled: 0
+    path: Assets/Scenes/Choose Apartment.unity
+    guid: 2e3f4673861bf5145bee68de0cf1fa5a
+  - enabled: 1
+    path: Assets/Scenes/Decissions.unity
+    guid: 5b6cba4a477d61347b93eafedb4381bf
+  - enabled: 0
+    path: Assets/Scenes/Classroom.unity
+    guid: 13af2b49e02c74b40afdf273eeb06967
+  - enabled: 1
+    path: Assets/Scenes/PretestScreen.unity
+    guid: 771a6fe9aaae4f349bf716dcc4fe79c3
+  - enabled: 0
+    path: Assets/Scenes/Apartment2.unity
+    guid: b91773761147f0e4381b293c72140043
+  - enabled: 0
+    path: Assets/Scenes/Apartment3.unity
+    guid: 10d7327283aab6149ba53652adb48d94
+  - enabled: 1
+    path: Assets/Scenes/Module UI.unity
+    guid: b9990f428d5a0ed46897480581c30163
+  - enabled: 1
+    path: Assets/Scenes/Module 1.unity
+    guid: 2743eb5bcefa06e4399eae43f9255e0b
   m_configObjects: {}

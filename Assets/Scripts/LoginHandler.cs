@@ -6,6 +6,7 @@ using System.IO;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 public class LoginHandler : MonoBehaviour
 {
     [System.Serializable]
@@ -60,10 +61,20 @@ public class LoginHandler : MonoBehaviour
     {
         public Data2 data2 { get; set; }
     }
+    public class TakenAssessment
+    {
+        public bool ok { get; set; }
+        public bool taken { get; set; }
+    }
+    public class pretestData
+    {
+        public TakenAssessment takenAssessment { get; set; }
+    }
+    Response<pretestData> preResponse;
+    public bool preTaken = false;
 
     private string userusername;
     private string userpassword;
-    private string userToken;
     [SerializeField] public GraphQLConfig Config;
     public Text textField;
     [SerializeField] public GameObject wrongCred;
@@ -89,7 +100,7 @@ public class LoginHandler : MonoBehaviour
         //var responseType = new { createAuthor = new { author = new { firstName = "" } } };
         Data hopeThisWorks = new Data();
         var response = await client.Send(() => hopeThisWorks, request);
-        userToken = response.Data.tokenAuth.token;
+        SaveBetweenScenes.authenticationToken = response.Data.tokenAuth.token;
         addTokenHeader();
         //Debug.Log("Got This Far");
     }
@@ -121,7 +132,7 @@ public class LoginHandler : MonoBehaviour
 
         // You're going to need to set this to the right data type
         Data2 listOfLessons = new Data2();
-        var response = await client.Send(() => listOfLessons, request, null, userToken, "Bearer");
+        var response = await client.Send(() => listOfLessons, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
         //var response  = await client.Send(request,null,userToken,"Bearer");
         //File.WriteAllText("Output.txt", response.Data.allLessons[0].title);
         //Debug.Log(response.Data.allLessons[0].title);
@@ -160,7 +171,7 @@ public class LoginHandler : MonoBehaviour
     {
         Header GQLHeader = new Header();
         GQLHeader.Key = "Authorization";
-        GQLHeader.Value = "Bearer " + userToken;
+        GQLHeader.Value = "Bearer " + SaveBetweenScenes.authenticationToken;
         Config.CustomHeaders[0] = GQLHeader;
         //Config.CustomHeaders.Add(GQLHeader);
     }
@@ -188,7 +199,7 @@ public class LoginHandler : MonoBehaviour
             };
             Data hopeThisWorks = new Data();
             var response = await client.Send(() => hopeThisWorks, request);
-            userToken = response.Data.tokenAuth.token;
+            SaveBetweenScenes.authenticationToken = response.Data.tokenAuth.token;
         }
         catch (System.Exception)
         {
@@ -197,9 +208,15 @@ public class LoginHandler : MonoBehaviour
         }
         finally
         {
-            if (userToken != null)
+            if (SaveBetweenScenes.authenticationToken != null)
             {
-                SceneManager.LoadScene("SampleScene");
+                loadcheckPretest();
+                await Task.Delay(500);
+                Debug.Log(preTaken);
+                if(preTaken == true)
+                    SceneManager.LoadScene("Apartment1");
+                else
+                    SceneManager.LoadScene("PretestScreen");
             }
             else
             {
@@ -218,4 +235,26 @@ public class LoginHandler : MonoBehaviour
         userpassword = input;
     }
 
+    public async void loadcheckPretest()
+    {
+        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var request = new Request
+        {
+            Query = @"mutation taken 
+                    {  takenAssessment {
+                      ok
+                      taken
+                    }
+                    }"
+        };
+        pretestData preData = new pretestData();
+        preResponse = await client.Send(() => preData, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
+        preTaken = preResponse.Data.takenAssessment.taken;
+    }
+
+    IEnumerator wait(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+    }
+    
 }
