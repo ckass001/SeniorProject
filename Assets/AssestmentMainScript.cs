@@ -106,10 +106,13 @@ public class AssestmentMainScript : MonoBehaviour
     public void fillQuestion(int questionNumber)
     {
         QandABoxes[0].text = questResponse.Data.allQuestionsByAssessment[questionNumber].description;
-        QandABoxes[1].text = "A) " + questResponse.Data.allQuestionsByAssessment[questionNumber].options[0];
-        QandABoxes[2].text = "B) " + questResponse.Data.allQuestionsByAssessment[questionNumber].options[1];
-        QandABoxes[3].text = "C) " + questResponse.Data.allQuestionsByAssessment[questionNumber].options[2];
-        QandABoxes[4].text = "D) " + questResponse.Data.allQuestionsByAssessment[questionNumber].options[3];
+        for(int i=0; i< questResponse.Data.allQuestionsByAssessment[questionNumber].options.Count;i++)
+        {
+            if (questResponse.Data.allQuestionsByAssessment[questionNumber].options[i] != null)
+                QandABoxes[(i+1)].text = questResponse.Data.allQuestionsByAssessment[questionNumber].options[i];
+            else
+                QandABoxes[(i+1)].text = "";
+        }
     }
 
     public void doTheThing(int choice)

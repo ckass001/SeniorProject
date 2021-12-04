@@ -9,4 +9,10 @@ public class Cellphone : MonoBehaviour
     {
         SceneManager.LoadScene(scenename);
     }
+
+    public void restartGame()
+    {
+        SaveBetweenScenes.currentLesson = 1;
+        SceneManager.LoadScene("Apartment1");
+    }
 }

@@ -6,6 +6,7 @@ using System.IO;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 public class LoginHandler : MonoBehaviour
 {
     [System.Serializable]
@@ -60,6 +61,17 @@ public class LoginHandler : MonoBehaviour
     {
         public Data2 data2 { get; set; }
     }
+    public class TakenAssessment
+    {
+        public bool ok { get; set; }
+        public bool taken { get; set; }
+    }
+    public class pretestData
+    {
+        public TakenAssessment takenAssessment { get; set; }
+    }
+    Response<pretestData> preResponse;
+    public bool preTaken = false;
 
     private string userusername;
     private string userpassword;
@@ -198,7 +210,13 @@ public class LoginHandler : MonoBehaviour
         {
             if (SaveBetweenScenes.authenticationToken != null)
             {
-                SceneManager.LoadScene("PretestScreen");
+                loadcheckPretest();
+                await Task.Delay(500);
+                Debug.Log(preTaken);
+                if(preTaken == true)
+                    SceneManager.LoadScene("Apartment1");
+                else
+                    SceneManager.LoadScene("PretestScreen");
             }
             else
             {
@@ -217,4 +235,26 @@ public class LoginHandler : MonoBehaviour
         userpassword = input;
     }
 
+    public async void loadcheckPretest()
+    {
+        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var request = new Request
+        {
+            Query = @"mutation taken 
+                    {  takenAssessment {
+                      ok
+                      taken
+                    }
+                    }"
+        };
+        pretestData preData = new pretestData();
+        preResponse = await client.Send(() => preData, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
+        preTaken = preResponse.Data.takenAssessment.taken;
+    }
+
+    IEnumerator wait(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+    }
+    
 }
