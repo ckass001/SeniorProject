@@ -6,29 +6,21 @@ using UnityEngine.UI;
 
 public class LessonButtonFill : MonoBehaviour
 {
-    [System.Serializable]
-    public class Module
-    {
-        public string id { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public int startingBank { get; set; }
-        public int startingMorale { get; set; }
-    }
-    [System.Serializable]
     public class AllLesson
     {
         public string id { get; set; }
         public string title { get; set; }
         public string description { get; set; }
         public string content { get; set; }
-        public Module module { get; set; }
     }
-    [System.Serializable]
-    public class Data2
+    public class LessonData
     {
         public List<AllLesson> allLessons { get; set; }
     }
+
+    Response<LessonData> lsResponse;
+
+    public Text[] buttonTextField;
 
     public Text buttonTextField1;
     public Text buttonTextField2;
@@ -41,31 +33,32 @@ public class LessonButtonFill : MonoBehaviour
         var client = new GraphQLClient("http://localhost:8000/graphql/");
         var request = new Request
         {
-            Query = @"query allLessons
+            Query = @"query allLessons($course: ID!, $module: ID!)
                     {
-                      allLessons
+                      allLessons(course:$course, module:$module)
                       {
-                        id,
-                        title,
-                        description,
-                        content,
-                        module
-                        {
-                          id,
-                          title,
-                          description,
-                          startingBank,
-                          startingMorale
-                        }
+                        id
+                        title
+                        description
+                        content
                       }
-                    }"
+                    }",
+            Variables = new
+            {
+                course = 1,
+                module = 1
+            }
         };
-        Data2 listOfLessons = new Data2();
-        var response = await client.Send(() => listOfLessons, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
-        buttonTextField1.text = response.Data.allLessons[0].title + System.Environment.NewLine + response.Data.allLessons[0].description;
-        buttonTextField2.text = response.Data.allLessons[1].title + System.Environment.NewLine + response.Data.allLessons[1].description;
-        buttonTextField3.text = response.Data.allLessons[2].title + System.Environment.NewLine + response.Data.allLessons[2].description;
-        buttonTextField4.text = response.Data.allLessons[3].title + System.Environment.NewLine + response.Data.allLessons[3].description;
-        buttonTextField5.text = response.Data.allLessons[4].title + System.Environment.NewLine + response.Data.allLessons[4].description;
+        LessonData lsData = new LessonData();
+        lsResponse = await client.Send(() => lsData, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
+        for(int i = 0; i < SaveBetweenScenes.currentLesson;i++)
+        {
+            buttonTextField[i].text = lsResponse.Data.allLessons[i].title + System.Environment.NewLine + lsResponse.Data.allLessons[i].description;
+        }
+        /*buttonTextField1.text = lsResponse.Data.allLessons[0].title + System.Environment.NewLine + lsResponse.Data.allLessons[0].description;
+        buttonTextField2.text = lsResponse.Data.allLessons[1].title + System.Environment.NewLine + lsResponse.Data.allLessons[1].description;
+        buttonTextField3.text = lsResponse.Data.allLessons[2].title + System.Environment.NewLine + lsResponse.Data.allLessons[2].description;
+        buttonTextField4.text = lsResponse.Data.allLessons[3].title + System.Environment.NewLine + lsResponse.Data.allLessons[3].description;
+        buttonTextField5.text = lsResponse.Data.allLessons[4].title + System.Environment.NewLine + lsResponse.Data.allLessons[4].description;*/
     }
 }

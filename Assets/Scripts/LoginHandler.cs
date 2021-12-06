@@ -210,6 +210,7 @@ public class LoginHandler : MonoBehaviour
         {
             if (SaveBetweenScenes.authenticationToken != null)
             {
+                SyncStats.switchLesson(1);
                 loadcheckPretest();
                 await Task.Delay(500);
                 Debug.Log(preTaken);

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class SpawnIcons : MonoBehaviour
 {
-    [SerializeField] public SpriteRenderer[] spawnPoints;
-    [SerializeField] public Sprite[] icons;
+    [SerializeField] public static SpriteRenderer[] spawnPoints;
+    [SerializeField] public static Sprite[] icons;
     private int counter;
+
+    private void Start()
+    {
+        chooseIcon(SyncStats.remainingEvents[0].coffeeevent.image);
+    }
 
     public void Update()
     {
@@ -28,7 +33,7 @@ public class SpawnIcons : MonoBehaviour
         }
     }
 
-    public void updateIcons(Sprite filename)
+    public static void updateIcons(Sprite filename)
     {
         for(int i = 0; i< spawnPoints.Length; i++)
         {
@@ -36,20 +41,20 @@ public class SpawnIcons : MonoBehaviour
         }
     }
 
-    public void chooseIcon(string icon)
+    public static void chooseIcon(string icon)
     {
         switch(icon)
         {
             case "clear":
                 updateIcons(icons[0]);
                 break;
-            case "fire":
+            case "FR":
                 updateIcons(icons[1]);
                 break;
-            case "water":
+            case "WR":
                 updateIcons(icons[2]);
                 break;
-            case "bug":
+            case "VR":
                 updateIcons(icons[3]);
                 break;
         }

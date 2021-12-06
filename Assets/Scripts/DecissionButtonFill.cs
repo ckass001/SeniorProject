@@ -3,93 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SimpleGraphQL;
+using System;
+
 public class DecissionButtonFill : MonoBehaviour
 {
     public Text[] dcButtonText;
+    public Text evButtonText;
+    public Text evButtonText2;
     public Text dcText;
     public Text[] chButtonText;
-    Response<Data> dcResponse;
-    Response<Data2> chResponse;
+    Response<DecisionData> dcResponse;
+    Response<ChoiceData> chResponse;
 
-    [System.Serializable]
-    public class Node
+    public class AllDecision
     {
-        public float id { get; set; }
+        public string id { get; set; }
         public string title { get; set; }
         public string statement { get; set; }
     }
-    [System.Serializable]
-    public class Edge
+
+    public class DecisionData
     {
-        public Node node { get; set; }
+        public List<AllDecision> allDecisions { get; set; }
     }
-    [System.Serializable]
-    public class AllDecisionsfiltered
+    public class AllChoice
     {
-        public List<Edge> edges { get; set; }
-    }
-    [System.Serializable]
-    public class Data
-    {
-        public AllDecisionsfiltered allDecisionsfiltered { get; set; }
-    }
-    [System.Serializable]
-    public class Node2
-    {
-        public float id { get; set; }
         public string statement { get; set; }
-        public float bankInfluence { get; set; }
-        public float moraleInfluence { get; set; }
+        public int bankInfluence { get; set; }
+        public double moraleInfluence { get; set; }
     }
-    [System.Serializable]
-    public class Edge2
+
+    public class ChoiceData
     {
-        public Node2 node { get; set; }
-    }
-    [System.Serializable]
-    public class AllChoicesfiltered
-    {
-        public List<Edge2> edges { get; set; }
-    }
-    [System.Serializable]
-    public class Data2
-    {
-        public AllChoicesfiltered allChoicesfiltered { get; set; }
+        public List<AllChoice> allChoices { get; set; }
     }
 
     private void Start()
     {
         fillDcButtons();
+        fillEvButton();
     }
     public async void fillDcButtons()
     {
+        Debug.Log(SaveBetweenScenes.currentLesson);
         var client = new GraphQLClient("http://localhost:8000/graphql/");
         var request = new Request
         {
-            Query = @"query allDc
+            Query = @"query allDecisions($lesson: ID!)
                     {
-                        allDecisionsfiltered(lesson_Id: 1)
-                        {
-                        edges
-                        {
-                            node
-                            {
-                            id
-                            title
-                            statement
-                            }
-                        }
-                        }
-                    }"
+                      allDecisions(lesson: $lesson)
+                      {
+                        id
+                        title
+                        statement
+                      }
+                    }",
+            Variables = new
+            {
+                lesson = SaveBetweenScenes.currentLesson
+            }
         };
-        Data listOfLessons = new Data();
-        dcResponse = await client.Send(() => listOfLessons, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
+        DecisionData dcData = new DecisionData();
+        dcResponse = await client.Send(() => dcData, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
         //Debug.Log(response.Data.allDecisionsfiltered.edges[1].node.statement);
         for(int i = 0; i < 4; i++)
         {
             try
             {
-                dcButtonText[i].text = dcResponse.Data.allDecisionsfiltered.edges[i].node.title;
+                dcButtonText[i].text = dcResponse.Data.allDecisions[i].title;
             }
             catch (System.Exception)
             {
@@ -103,35 +84,28 @@ public class DecissionButtonFill : MonoBehaviour
         var client = new GraphQLClient("http://localhost:8000/graphql/");
         var request = new Request
         {
-            Query = @"query allChF($decision_Lesson_Id: Float!)
+            Query = @"query allChoices($decision: ID!)
                     {
-                      allChoicesfiltered(decision_Lesson_Id: $decision_Lesson_Id)
-                      {
-                        edges
+                        allChoices(decision: $decision)
                         {
-                          node
-                          {
-                            id
-                            statement
-                            bankInfluence
-                            moraleInfluence
-                          }
+                        statement
+                        bankInfluence
+                        moraleInfluence
                         }
-                      }
                     }",
             Variables = new
             {
-                decision_Lesson_Id = dcResponse.Data.allDecisionsfiltered.edges[(int)decission].node.id
+                decision = dcResponse.Data.allDecisions[(int)decission].id
             }
         };
-        Data2 listOfLessons = new Data2();
-        chResponse = await client.Send(() => listOfLessons, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
-        dcText.text = dcResponse.Data.allDecisionsfiltered.edges[decission].node.statement;
+        ChoiceData chData = new ChoiceData();
+        chResponse = await client.Send(() => chData, request, null, SaveBetweenScenes.authenticationToken, "Bearer");
+        dcText.text = dcResponse.Data.allDecisions[decission].statement;
         for (int i = 0; i < 4; i++)
         {
             try
             {
-                chButtonText[i].text += chResponse.Data.allChoicesfiltered.edges[i].node.statement;
+                chButtonText[i].text += chResponse.Data.allChoices[i].statement;
             }
             catch (System.Exception)
             {
@@ -146,5 +120,11 @@ public class DecissionButtonFill : MonoBehaviour
         chButtonText[1].text = "B)";
         chButtonText[2].text = "C)";
         chButtonText[3].text = "D)";
+    }
+
+    public void fillEvButton()
+    {
+        evButtonText.text = SyncStats.remainingEvents[0].coffeeevent.title;
+        evButtonText2.text = SyncStats.remainingEvents[0].coffeeevent.statement + Environment.NewLine + "Effect on your Bank Account: " + SyncStats.remainingEvents[0].coffeeevent.bankInfluence + Environment.NewLine + "Effect on Moral: " + SyncStats.remainingEvents[0].coffeeevent.moraleInfluence;
     }
 }
