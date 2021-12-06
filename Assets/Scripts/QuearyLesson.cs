@@ -32,7 +32,7 @@ public class QuearyLesson : MonoBehaviour
     public Text contentTextField;
     public async void  quearyLessonContentByNumber(int lessonNumber)
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"query allLessons

@@ -10,6 +10,7 @@ public class SpawnIcons : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(SyncStats.remainingEvents[0].coffeeevent.image);
         chooseIcon(SyncStats.remainingEvents[0].coffeeevent.image);
     }
 

@@ -81,7 +81,7 @@ public class LoginHandler : MonoBehaviour
 
     public async void generateToken()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"mutation TokenAuth($username: String!, $password: String!) {
@@ -107,7 +107,7 @@ public class LoginHandler : MonoBehaviour
 
     public async void quereyLessons()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"query allLessons
@@ -144,7 +144,7 @@ public class LoginHandler : MonoBehaviour
 
     public async void makeLesson()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"mutation createLesson($content: String!, $description: String!, $module: ID!, $title: String!){  
@@ -181,7 +181,7 @@ public class LoginHandler : MonoBehaviour
         //userToken = null;
         try
         {
-            var client = new GraphQLClient("http://localhost:8000/graphql/");
+            var client = new GraphQLClient(SaveBetweenScenes.URL);
             var request = new Request
             {
                 Query = @"mutation TokenAuth($username: String!, $password: String!) {
@@ -211,6 +211,7 @@ public class LoginHandler : MonoBehaviour
             if (SaveBetweenScenes.authenticationToken != null)
             {
                 SyncStats.switchLesson(1);
+                SyncStats.syncAllStats();
                 loadcheckPretest();
                 await Task.Delay(500);
                 Debug.Log(preTaken);
@@ -238,7 +239,7 @@ public class LoginHandler : MonoBehaviour
 
     public async void loadcheckPretest()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"mutation taken 

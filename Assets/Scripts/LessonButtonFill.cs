@@ -30,7 +30,7 @@ public class LessonButtonFill : MonoBehaviour
 
     private async void Start()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"query allLessons($course: ID!, $module: ID!)

@@ -16,7 +16,6 @@ public class AssestmentMainScript : MonoBehaviour
     {
         public List<AllAssessment> allAssessments { get; set; }
     }
-
     public class AllQuestionsByAssessment
     {
         public string description { get; set; }
@@ -28,7 +27,6 @@ public class AssestmentMainScript : MonoBehaviour
     {
         public List<AllQuestionsByAssessment> allQuestionsByAssessment { get; set; }
     }
-
     public class ParseAnswer
     {
         public bool ok { get; set; }
@@ -63,7 +61,7 @@ public class AssestmentMainScript : MonoBehaviour
 
     public async void getAssessment()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"query allAss
@@ -81,7 +79,7 @@ public class AssestmentMainScript : MonoBehaviour
 
     public async void getQuestions()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"query getQuestions($assessment: ID!)
@@ -149,7 +147,7 @@ public class AssestmentMainScript : MonoBehaviour
 
     public async void sendAnswerToBackend(int choice)
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"mutation gibAnswer($assessmentQuestion: ID!, $response: Int!)
@@ -171,7 +169,7 @@ public class AssestmentMainScript : MonoBehaviour
 
     public async void gradeAssessment()
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"mutation gradeAss($assessment: ID!)

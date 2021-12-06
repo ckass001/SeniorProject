@@ -21,7 +21,6 @@ public class DecissionButtonFill : MonoBehaviour
         public string title { get; set; }
         public string statement { get; set; }
     }
-
     public class DecisionData
     {
         public List<AllDecision> allDecisions { get; set; }
@@ -32,11 +31,11 @@ public class DecissionButtonFill : MonoBehaviour
         public int bankInfluence { get; set; }
         public double moraleInfluence { get; set; }
     }
-
     public class ChoiceData
     {
         public List<AllChoice> allChoices { get; set; }
     }
+
 
     private void Start()
     {
@@ -46,7 +45,7 @@ public class DecissionButtonFill : MonoBehaviour
     public async void fillDcButtons()
     {
         Debug.Log(SaveBetweenScenes.currentLesson);
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"query allDecisions($lesson: ID!)
@@ -81,7 +80,7 @@ public class DecissionButtonFill : MonoBehaviour
 
     public async void fillChButtons(int decission)
     {
-        var client = new GraphQLClient("http://localhost:8000/graphql/");
+        var client = new GraphQLClient(SaveBetweenScenes.URL);
         var request = new Request
         {
             Query = @"query allChoices($decision: ID!)
