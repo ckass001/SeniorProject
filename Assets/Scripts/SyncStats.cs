@@ -74,6 +74,7 @@ public class SyncStats : MonoBehaviour
         remainingEvents = slResponse.Data.switchLesson.details.eventsLeft;
     }
 
+
     public static async void syncAllStats()
     {
 

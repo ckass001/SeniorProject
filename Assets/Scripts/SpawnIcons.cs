@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpawnIcons : MonoBehaviour
 {
-    [SerializeField] public static SpriteRenderer[] spawnPoints;
-    [SerializeField] public static Sprite[] icons;
+    [SerializeField] public SpriteRenderer[] spawnPoints;
+    [SerializeField] public Sprite[] icons;
     private int counter;
 
     private void Start()
@@ -15,25 +15,25 @@ public class SpawnIcons : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            chooseIcon("fire");
+            chooseIcon("FR");
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             chooseIcon("clear");
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            chooseIcon("water");
+            chooseIcon("WR");
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            chooseIcon("bug");
+            chooseIcon("VR");
         }
     }
 
-    public static void updateIcons(Sprite filename)
+    public void updateIcons(Sprite filename)
     {
         for(int i = 0; i< spawnPoints.Length; i++)
         {
@@ -41,7 +41,7 @@ public class SpawnIcons : MonoBehaviour
         }
     }
 
-    public static void chooseIcon(string icon)
+    public void chooseIcon(string icon)
     {
         switch(icon)
         {
