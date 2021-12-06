@@ -8,23 +8,29 @@ public class SpawnIcons : MonoBehaviour
     [SerializeField] public Sprite[] icons;
     private int counter;
 
+    private void Start()
+    {
+        Debug.Log(SyncStats.remainingEvents[0].coffeeevent.image);
+        chooseIcon(SyncStats.remainingEvents[0].coffeeevent.image);
+    }
+
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            chooseIcon("fire");
+            chooseIcon("FR");
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             chooseIcon("clear");
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            chooseIcon("water");
+            chooseIcon("WR");
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            chooseIcon("bug");
+            chooseIcon("VR");
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -67,13 +73,13 @@ public class SpawnIcons : MonoBehaviour
             case "clear":
                 updateIcons(icons[0]);
                 break;
-            case "fire":
+            case "FR":
                 updateIcons(icons[1]);
                 break;
-            case "water":
+            case "WR":
                 updateIcons(icons[2]);
                 break;
-            case "bug":
+            case "VR":
                 updateIcons(icons[3]);
                 break;
             case "puppy":

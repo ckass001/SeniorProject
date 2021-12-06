@@ -10,8 +10,19 @@ public class MoraleMeter : MonoBehaviour
     public Slider slider;
     public Gradient gradient;
     public Image fill;
+    public Text bank;
+    SpawnIcons SPI;
+    private void Start()
+    {
+        SetMaxMorale(SaveBetweenScenes.playerMorale);
+        SetMorale(SaveBetweenScenes.playerMorale);
+        if (SyncStats.remainingEvents[0] == null)
+        {
+            SPI.chooseIcon("clear");
+        }
+        bank.text = "Balance: " + SaveBetweenScenes.playerBank;
+    }
 
-    
     public void SetMaxMorale(int morale)
     {
         slider.maxValue = morale;
