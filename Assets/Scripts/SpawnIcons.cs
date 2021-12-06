@@ -26,6 +26,11 @@ public class SpawnIcons : MonoBehaviour
         {
             chooseIcon("bug");
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            chooseIcon("cherries");
+        }
+
     }
 
     public void updateIcons(Sprite filename)
@@ -51,6 +56,9 @@ public class SpawnIcons : MonoBehaviour
                 break;
             case "bug":
                 updateIcons(icons[3]);
+                break;
+            case "cherries":
+                updateIcons(icons[4]);
                 break;
         }
     }
