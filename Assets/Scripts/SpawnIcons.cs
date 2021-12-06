@@ -26,19 +26,38 @@ public class SpawnIcons : MonoBehaviour
         {
             chooseIcon("bug");
         }
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.U))
         {
-            chooseIcon("cherries");
+            chooseIcon("puppy");
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            chooseIcon("check");
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            chooseIcon("past due");
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            chooseIcon("clean");
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            chooseIcon("vacation");
+        }
+        
 
     }
 
     public void updateIcons(Sprite filename)
     {
+        Debug.Log(spawnPoints.Length);
         for(int i = 0; i< spawnPoints.Length; i++)
         {
             spawnPoints[i].sprite = filename;
         }
+
     }
 
     public void chooseIcon(string icon)
@@ -57,8 +76,20 @@ public class SpawnIcons : MonoBehaviour
             case "bug":
                 updateIcons(icons[3]);
                 break;
-            case "cherries":
+            case "puppy":
                 updateIcons(icons[4]);
+                break;
+            case "check":
+                updateIcons(icons[5]);
+                break;
+            case "past due":
+                updateIcons(icons[6]);
+                break;
+            case "clean":
+                updateIcons(icons[7]);
+                break;
+            case "vacation":
+                updateIcons(icons[8]);
                 break;
         }
     }
