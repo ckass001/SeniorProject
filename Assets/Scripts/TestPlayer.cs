@@ -10,6 +10,7 @@ public class TestPlayer : MonoBehaviour
 
     public MoraleMeter moralemeter;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +21,22 @@ public class TestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        //clamps morale so it doesn't go below -10 and does go above 10; also allows moral to move up and down with corresponding keys
+        currentMorale = Mathf.Clamp(currentMorale,-10,maxMorale);
+
+        //prints morale value to the console 
+        Debug.Log(currentMorale);
+
+        // press "d" to deduct morale and reduce bar
+         if(Input.GetKeyDown(KeyCode.D))
         {
-            TakeDamage(5);
+            TakeDamage(2);
         }
 
-        if(Input.GetKey(KeyCode.Mouse0))
+        // press "a" to add morale and increase bar
+        if(Input.GetKey(KeyCode.A))
         {
-            AddMorale(5);
+            AddMorale(1);
         }
     }
 
@@ -42,4 +51,6 @@ public class TestPlayer : MonoBehaviour
         currentMorale += bonus;
         moralemeter.SetMorale(currentMorale);
     }
+
+    
 }
